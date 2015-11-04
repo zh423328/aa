@@ -29,7 +29,7 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{760C3AB2-F550-4963-93A4-7D76BE2B38CB}</ProjectGuid>
+    <ProjectGuid>{71666DE3-D772-41E9-8624-8881686C7AED}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>aa</RootNamespace>
   </PropertyGroup>

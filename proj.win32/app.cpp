@@ -131,6 +131,7 @@ int App::run(void)
         CCEGLView* eglView = CCEGLView::sharedOpenGLView();
         eglView->setMenuResource(MAKEINTRESOURCE(IDC_LUAHOSTWIN32));
         eglView->setWndProc(WindowProc);
+		m_project.setFrameSize(CCSize(640,960));
         eglView->setFrameSize(m_project.getFrameSize().width, m_project.getFrameSize().height);
         eglView->setFrameZoomFactor(m_project.getFrameScale());
 
@@ -156,6 +157,7 @@ int App::run(void)
         }
 
         // update menu
+		
         createViewMenu();
         updateMenu();
 

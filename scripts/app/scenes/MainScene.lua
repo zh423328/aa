@@ -1,77 +1,91 @@
 
 local MainScene = class("MainScene", function()
-    return display.newScene("MainScene",1)
+    return display.newScene("MainScene")
 end)
 
-function MainScene:ctor(levelindex)
-	--失败字--
-	-- self.failLabel = ui.newBMFontLabel({
- --            text  = "Failed!",
- --            font  = "fnt-lianji.fnt",
- --            x     = display.cx,
- --            y     = display.cy,
- --            align = ui.TEXT_ALIGEN_CENTER,
- --        })
-    self.failLabel = ui.newTTFLabel({text = "Failed!", size = 30, align = ui.TEXT_ALIGN_CENTER,x = display.cx,y = display.cy});
-    self:addChild(self.failLabel, 6)
+function MainScene:ctor()
+    --初始化
+    self:initLevelIndex(GameData.lv);
+
+    -- 注册帧事件  注册之后一定要 启用 才生效
+    self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, function(dt) 
+        return self:updateMy(dt)
+    end);
+    self:scheduleUpdate();
+end
+
+function MainScene:initLevelIndex(level)
+
+    if self.faileLabel == nil then
+        --todo
+        self.failLabel = ui.newTTFLabel({text = "Failed!", size = 30, align = ui.TEXT_ALIGN_CENTER,x = display.cx,y = display.cy});
+        self:addChild(self.failLabel, 6)
+    end
+        --失败字--
     self.failLabel:setColor(ccc3(252,129, 131))
     self.failLabel:setScale(0.7)
     self.failLabel:setOpacity(0)
 
-    self.sucessLabel = ui.newTTFLabel({text = "Successs!", size = 30, align = ui.TEXT_ALIGN_CENTER,x = display.cx,y = display.cy});
-    self:addChild(self.sucessLabel, 6)
-    self.sucessLabel:setColor(ccc3(0,255, 0))
-    self.sucessLabel:setScale(0.7)
-    self.sucessLabel:setOpacity(0)
+    if self.sucessLabel == nil then
+        --todo
+        self.sucessLabel = ui.newTTFLabel({text = "Successs!", size = 30, align = ui.TEXT_ALIGN_CENTER,x = display.cx,y = display.cy});
+        self:addChild(self.sucessLabel, 6);
+    end
+    self.sucessLabel:setColor(ccc3(0,255, 0));
+    self.sucessLabel:setScale(0.7);
+    self.sucessLabel:setOpacity(0);
 
-    --显示第几关---
-    -- self.titleLabel = ui.newBMFontLabel({
-    --         text  = ""..levelIndex,
-    --         font  = "fnt-lianji.fnt",
-    --         x     = display.cx,
-    --         y     = display.top + 50,
-    --         align = ui.TEXT_ALIGEN_CENTER,
-    --     })
-   --  self.titleLabel = ui.newTTFLabel({text = "LEVEL", size = 30, align = ui.TEXT_ALIGN_CENTER,
-   --      x = display.cx,y = display.top+70});
-   --  self:addChild(self.titleLabel, 6);
-   --  self.titleLabel:setVisible(false);
+    if self.allpass == nil then
+        --todo
+        self.allpass = ui.newTTFLabel({text = "All Pass!", size = 30, align = ui.TEXT_ALIGN_CENTER,x = display.cx,y = display.cy});
+        self:addChild(self.allpass, 6); 
+    end
 
-   --  ---做个动画--
-   --  self:performWithDelay(
-   --  	function()
-			-- self.titleLabel:setVisible(true)
-			-- local seq = transition.sequence({
-			--     CCMoveBy:create(0.1,ccp(0,-120)),
-			--     CCMoveBy:create(0.2,ccp(0,20))
-			-- })
-			-- self.titleLabel:runAction(seq)
-   --  	end,1.0)
+    self.allpass:setColor(ccc3(0,255, 0));
+    self.allpass:setScale(0.7);
+    self.allpass:setOpacity(0);
 
-   	--添加一个自定义颜色--
-    display.newColorLayer(ccc4(255, 250, 215, 255)):addTo(self);
 
+
+    --添加一个自定义颜色--
+    if self.colorLayer == nil then
+        --todo
+        self.colorLayer = display.newColorLayer(ccc4(255, 250, 215, 255));
+        self:addChild(self.colorLayer);
+    end
+
+    if self.contentLayer ~= nil then
+        --todo
+        self.contentLayer:removeFromParentAndCleanup(true);
+    end
     --添加一个圆球转动球--
     self.contentLayer=display.newLayer();
     self.contentLayer:setPosition(ccp(0,100));
     self:addChild(self.contentLayer, 2);
 
     --再定一个层  这个层放置所有  还没有插入的球  每插入一个  向上移动一点
+    if self.contentLayer2 ~= nil then
+        --todo
+        self.contentLayer2:removeFromParentAndCleanup(true);
+    end
+
     self.contentLayer2 = display.newLayer();
     self.contentLayer2:setPosition(ccp(0,100));
     self:addChild(self.contentLayer2, 2);
 
-    --定义一个半透明的层-
-    self.bgLayer = display.newColorLayer(ccc4(255, 0, 0, 255)):addTo(self,1);
-    self.bgLayer:setVisible(false);
+    local levellen = #levels;
 
+    if level > levellen then
+        --todo
+        level = levellen;
+    end
 
 
     --数据--
-    self.peizhiData = levels[2];
+    self.peizhiData = levels[level];
     sudu = self.peizhiData.speed1
     sudu2 = self.peizhiData.speed2
-    time = self.peizhiData.time * 60
+    time = self.peizhiData.time;
     startNumberLevel = self.peizhiData.startNumber
     myLevelNumber = self.peizhiData.myNumber
 
@@ -86,10 +100,17 @@ function MainScene:ctor(levelindex)
     self.ballDown = {};
 
     --添加资源--
-    self:addResources(levelindex);
+    self:addResources(level);
 
     --当前Layer的角度
     self.angleDu = 0.0;
+
+
+    self.gameOver = false;
+
+    self.running =  false;
+
+    self.speedchange = 1;
 
     --添加触摸事件--
     self.contentLayer:setTouchMode(cc.TOUCH_MODE_ONE_BY_ONE)  --单点触摸
@@ -97,19 +118,7 @@ function MainScene:ctor(levelindex)
         return self:onTouch(event.name, event.x,event.y)
     end)
     self.contentLayer:setTouchEnabled(true)
-
-    --添加帧事件--
-    -- 注册帧事件  注册之后一定要 启用 才生效
-    self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, function(dt) 
-        return self:updateMy(dt)
-    end)
-    self:scheduleUpdate();
-
-    self.gameOver = false;
-
-    self.running =  false;
 end
-
 
 function MainScene:onEnter()
 end
@@ -124,9 +133,14 @@ function MainScene:addResources(levelindex)
     self.contentLayer:addChild(self.circle, 2)
 
     --显示还有多少个球没有插入进去--
-    self.numLabel = ui.newTTFLabel({text = levelindex, size = 30, align = ui.TEXT_ALIGN_CENTER,
-        x = display.cx,y = display.cy+100});
-    self:addChild(self.numLabel, 3);
+    if self.numLabel == nil then
+        --todo
+        self.numLabel = ui.newTTFLabel({text = levelindex, size = 30, align = ui.TEXT_ALIGN_CENTER,
+            x = display.cx,y = display.cy+100});
+        self:addChild(self.numLabel, 3);
+    end
+    self.numLabel:setString(levelindex);
+
 
 
     --放置预先准备好的球--
@@ -178,8 +192,26 @@ end
 function MainScene:updateMy(dt)
     --body--
    --旋转--
+   print(dt);
     if self.gameOver ~= true then
         --todo
+        if time ~= 0 then
+            --todo
+            self.jishitime = self.jishitime + dt;
+
+            if self.jishitime >= time then
+                --todo
+                if self.speedchange == 1 then
+                    --todo
+                    self.realsudu = sudu2;
+                    self.speedchange  = 2;
+                else
+                    self.realsudu = sudu;
+                    self.speedchange  = 1;
+                end
+                self.jishitime = 0;
+            end
+        end
         self.angleDu = self.angleDu + dt*self.realsudu;
         if self.contentLayer ~= nil then
             --todo
@@ -255,11 +287,8 @@ function MainScene:callback(ball)
                 local x2, y2= tmpball:getPosition()
                 local pos1 = self.contentLayer2:convertToWorldSpace(ccp(x1,y1));
                 local pos2 = self.contentLayer:convertToWorldSpace(ccp(x2,y2));
-                print(pos1.x,pos1.y);
-                print(pos2.x,pos2.y);
 
                 local dis = math.sqrt((pos2.x-pos1.x)*(pos2.x-pos1.x) + (pos2.y-pos1.y)*(pos2.y-pos1.y));
-                print(dis);
                 if dis < 2*rLittleBall then
                     --todo--
                     transition.execute(tmpball, CCScaleTo:create(0.1,1.2),{easing = "backout"});
@@ -306,7 +335,18 @@ function MainScene:callback(ball)
         if #self.ballDown == 0 then
             --todo
             self.gameOver = true;
-            self.sucessLabel:setOpacity(255);
+
+            GameData.lv = GameData.lv+1;
+
+            if GameData.lv >#levels then
+                --todo
+                GameData.lv = 1;
+                self.allpass:setOpacity(255);
+            else
+                self.sucessLabel:setOpacity(255);
+                self:initLevelIndex(GameData.lv);
+            end
+            GameState.save(GameData);
         end
     end
 end
