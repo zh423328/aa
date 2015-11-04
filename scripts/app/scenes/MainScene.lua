@@ -24,7 +24,7 @@ function MainScene:initLevelIndex(level)
         --失败字--
     self.failLabel:setColor(ccc3(252,129, 131))
     self.failLabel:setScale(0.7)
-    self.failLabel:setOpacity(0)
+    self.failLabel:setVisible(false);
 
     if self.sucessLabel == nil then
         --todo
@@ -33,7 +33,7 @@ function MainScene:initLevelIndex(level)
     end
     self.sucessLabel:setColor(ccc3(0,255, 0));
     self.sucessLabel:setScale(0.7);
-    self.sucessLabel:setOpacity(0);
+    self.sucessLabel:setVisible(false);
 
     if self.allpass == nil then
         --todo
@@ -43,7 +43,7 @@ function MainScene:initLevelIndex(level)
 
     self.allpass:setColor(ccc3(0,255, 0));
     self.allpass:setScale(0.7);
-    self.allpass:setOpacity(0);
+    self.allpass:setVisible(false);
 
 
 
@@ -192,7 +192,6 @@ end
 function MainScene:updateMy(dt)
     --body--
    --旋转--
-   print(dt);
     if self.gameOver ~= true then
         --todo
         if time ~= 0 then
@@ -293,7 +292,7 @@ function MainScene:callback(ball)
                     --todo--
                     transition.execute(tmpball, CCScaleTo:create(0.1,1.2),{easing = "backout"});
                     self.gameOver = true;
-                    self.failLabel:setOpacity(255);
+                    self.failLabel:setVisible(true);
                     --失败--
                     return;
                 end
@@ -341,9 +340,9 @@ function MainScene:callback(ball)
             if GameData.lv >#levels then
                 --todo
                 GameData.lv = 1;
-                self.allpass:setOpacity(255);
+                self.allpass:setVisible(true);
             else
-                self.sucessLabel:setOpacity(255);
+                self.sucessLabel:setVisible(true);
                 self:initLevelIndex(GameData.lv);
             end
             GameState.save(GameData);

@@ -82,8 +82,18 @@ bool AppDelegate::applicationDidFinishLaunching()
     CCLOG("------------------------------------------------");
     CCLOG("LOAD LUA FILE: %s", path.c_str());
     CCLOG("------------------------------------------------");
-    pEngine->executeScriptFile(path.c_str());
+    //pEngine->executeScriptFile(path.c_str());
 
+	bool isExists = CCFileUtils::sharedFileUtils()->isFileExist("res/game.zip");
+	if (isExists)
+	{
+		pStack->loadChunksFromZIP("res/game.zip");
+		pEngine->executeString("require 'main'");
+	}
+	else
+	{
+		pEngine->executeScriptFile(path.c_str());
+	}
     return true;
 }
 

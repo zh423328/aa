@@ -3,166 +3,57 @@
 	cocos2d.x.version: quick-cocos2d-x 2.2.6
 	cocos2d.x.compiled_with_profiler: false
 	cocos2d.x.compiled_with_gl_state_cache: true
-	gl.vendor: Intel
-	gl.renderer: Intel(R) HD Graphics 4400
-	gl.version: 4.3.0 - Build 10.18.10.3960
+	gl.vendor: ATI Technologies Inc.
+	gl.renderer: AMD Radeon HD 8650G + 8750M Dual Graphics
+	gl.version: 4.2.12422 Compatibility Profile Context 13.152.0.0
 	gl.max_texture_size: 16384
-	gl.max_texture_units: 192
+	gl.max_texture_units: 32
 	gl.supports_PVRTC: false
 	gl.supports_NPOT: true
 	gl.supports_BGRA8888: false
 	gl.supports_discard_framebuffer: false
 	gl.supports_vertex_array_object: true
 </dict>
-lua_loadChunksFromZIP() - load zip file: E:\quick-cocos2d-x-master\lib\framework_precompiled\framework_precompiled.zip
+lua_loadChunksFromZIP() - load zip file: E:\GitHub\quick-cocos2d-x-master\lib\framework_precompiled\framework_precompiled.zip
 lua_loadChunksFromZIP() - loaded chunks count: 123
 ------------------------------------------------
-LOAD LUA FILE: E:/quick-cocos2d-x-master/samples/aa/scripts/main.lua
+LOAD LUA FILE: scripts/main.lua
 ------------------------------------------------
-[0.1751] [INFO] 
-[0.1764] [INFO] # DEBUG                        = 2
-[0.1773] [INFO] #
-[0.1789] [INFO] # device.platform              = windows
-[0.1806] [INFO] # device.model                 = unknown
-[0.1833] [INFO] # device.language              = cn
-[0.1849] [INFO] # device.writablePath          = E:\quick-cocos2d-x-master\player\proj.win32\Debug\
-[0.1866] [INFO] # device.cachePath             = E:\quick-cocos2d-x-master\player\proj.win32\Debug\
-[0.1891] [INFO] # device.directorySeparator    = \
-[0.1903] [INFO] # device.pathSeparator         = ;
-[0.1910] [INFO] #
-[0.1937] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_WIDTH
-[0.1947] [INFO] # CONFIG_SCREEN_WIDTH          = 280.00
-[0.1959] [INFO] # CONFIG_SCREEN_HEIGHT         = 420.00
-[0.1973] [INFO] # display.widthInPixels        = 640.00
-[0.1990] [INFO] # display.heightInPixels       = 960.00
-[0.2002] [INFO] # display.contentScaleFactor   = 2.29
-[0.2014] [INFO] # display.width                = 280.00
-[0.2026] [INFO] # display.height               = 420.00
-[0.2037] [INFO] # display.cx                   = 140.00
-[0.2049] [INFO] # display.cy                   = 210.00
-[0.2062] [INFO] # display.left                 = 0.00
-[0.2078] [INFO] # display.right                = 280.00
-[0.2090] [INFO] # display.top                  = 420.00
-[0.2103] [INFO] # display.bottom               = 0.00
-[0.2116] [INFO] # display.c_left               = -140.00
-[0.2131] [INFO] # display.c_right              = 140.00
-[0.2144] [INFO] # display.c_top                = 210.00
-[0.2156] [INFO] # display.c_bottom             = -210.00
-[0.2167] [INFO] #
+lua_loadChunksFromZIP() - load zip file: E:\GitHub\quick-cocos2d-x-master\samples\aa\res/game.zip
+lua_loadChunksFromZIP() - loaded chunks count: 5
+[0.4513] [INFO] 
+[0.4522] [INFO] # DEBUG                        = 2
+[0.4529] [INFO] #
+[0.4547] [INFO] # device.platform              = windows
+[0.4558] [INFO] # device.model                 = unknown
+[0.4566] [INFO] # device.language              = cn
+[0.4575] [INFO] # device.writablePath          = E:\GitHub\quick-cocos2d-x-master\samples\aa\proj.win32\Debug\
+[0.4588] [INFO] # device.cachePath             = E:\GitHub\quick-cocos2d-x-master\samples\aa\proj.win32\Debug\
+[0.4621] [INFO] # device.directorySeparator    = \
+[0.4628] [INFO] # device.pathSeparator         = ;
+[0.4636] [INFO] #
+[0.4669] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_WIDTH
+[0.4676] [INFO] # CONFIG_SCREEN_WIDTH          = 320.00
+[0.4683] [INFO] # CONFIG_SCREEN_HEIGHT         = 480.00
+[0.4690] [INFO] # display.widthInPixels        = 640.00
+[0.4697] [INFO] # display.heightInPixels       = 960.00
+[0.4704] [INFO] # display.contentScaleFactor   = 2.00
+[0.4712] [INFO] # display.width                = 320.00
+[0.4731] [INFO] # display.height               = 480.00
+[0.4739] [INFO] # display.cx                   = 160.00
+[0.4746] [INFO] # display.cy                   = 240.00
+[0.4754] [INFO] # display.left                 = 0.00
+[0.4763] [INFO] # display.right                = 320.00
+[0.4770] [INFO] # display.top                  = 480.00
+[0.4778] [INFO] # display.bottom               = 0.00
+[0.4786] [INFO] # display.c_left               = -160.00
+[0.4793] [INFO] # display.c_right              = 160.00
+[0.4802] [INFO] # display.c_top                = 240.00
+[0.4813] [INFO] # display.c_bottom             = -240.00
+[0.4823] [INFO] #
 BaseFactory
-dragonBones::CCDBManager::printTickCount tickcount:1 thisptr:139874408 msCCDBManager:0, sizeof(128) 96, 20
-[1.5409] layer began
-[1.6446] havetable len:5
-[1.6462] 140  230
-[1.6481] 201.14865112305  361.58334350586
-[1.6503] 145.09766994114
-[1.6546] 140  230
-[1.6564] 207.9546661377  267.78430175781
-[1.6582] 77.752749849835
-[1.6600] 140  230
-[1.6618] 120.84965515137  232.3258972168
-[1.6650] 19.291073212361
-[1.6673] 140  230
-[1.6686] 60.209770202637  304.21044921875
-[1.6698] 108.96637804555
-[1.6712] 140  230
-[1.6724] 109.83728027344  384.09594726563
-[1.6739] 157.02022361783
-[2.0397] layer began
-[2.1558] havetable len:6
-[2.1565] 140  230
-[2.1574] 214.32164001465  339.60229492188
-[2.1585] 132.42495696283
-[2.1592] 140  230
-[2.1600] 191.12013244629  248.46356201172
-[2.1608] 54.352286644508
-[2.1615] 140  230
-[2.1622] 97.272361755371  242.3660736084
-[2.1629] 44.481129104961
-[2.1636] 140  230
-[2.1647] 62.472759246826  329.73638916016
-[2.1655] 126.32426679584
-[2.1661] 140  230
-[2.1670] 134.81318664551  389.83169555664
-[2.1677] 159.91583391674
-[2.1687] 140  230
-[2.1694] 114.7047958374  234.10432434082
-[2.1701] 25.626018651405
-[2.3773] layer began
-[2.4948] havetable len:7
-[2.4962] 140  230
-[2.4979] 218.90434265137  323.19494628906
-[2.4996] 122.11139710553
-[2.5012] 140  230
-[2.5026] 176.9319152832  239.03500366211
-[2.5038] 38.021015999839
-[2.5054] 140  230
-[2.5069] 83.920852661133  252.94627380371
-[2.5082] 60.592097238248
-[2.5092] 140  230
-[2.5099] 68.40926361084  345.70388793945
-[2.5108] 136.06110105775
-[2.5116] 140  230
-[2.5127] 151.83364868164  389.11996459961
-[2.5138] 159.55938823931
-[2.5149] 140  230
-[2.5159] 99.208786010742  241.18084716797
-[2.5170] 42.295797452122
-[2.5179] 140  230
-[2.5188] 123.06149291992  231.81376647949
-[2.5198] 17.035338885505
-[3.5955] layer began
-[3.7106] havetable len:8
-[3.7114] 140  230
-[3.7126] 206.14363098145  264.99981689453
-[3.7139] 74.832927926551
-[3.7148] 140  230
-[3.7155] 117.64176177979  233.18786621094
-[3.7162] 22.584359793687
-[3.7169] 140  230
-[3.7177] 60.038208007813  307.52770996094
-[3.7185] 111.37519468171
-[3.7192] 140  230
-[3.7199] 112.93913269043  385.28421020508
-[3.7205] 157.62447931258
-[3.7217] 140  230
-[3.7225] 203.23725891113  359.00051879883
-[3.7242] 143.6665749747
-[3.7258] 140  230
-[3.7267] 62.954833984375  288.45837402344
-[3.7276] 96.712662562042
-[3.7285] 140  230
-[3.7294] 73.71883392334  265.20263671875
-[3.7301] 75.049441093416
-[3.7309] 140  230
-[3.7316] 84.706581115723  252.18447875977
-[3.7325] 59.577791749566
-[4.0766] layer began
-[4.1799] havetable len:9
-[4.1813] 140  230
-[4.1827] 190.13668823242  247.65966796875
-[4.1842] 53.155915754331
-[4.1855] 140  230
-[4.1867] 96.203948974609  243.05291748047
-[4.1881] 45.699811161213
-[4.1892] 140  230
-[4.1905] 62.795848846436  330.96469116211
-[4.1928] 127.09976324448
-[4.1940] 140  230
-[4.1954] 136.08126831055  389.90393066406
-[4.1965] 159.95194121945
-[4.1976] 140  230
-[4.1987] 214.7822265625  338.41857910156
-[4.1998] 131.70789537475
-[4.2009] 140  230
-[4.2021] 60.021949768066  311.87408447266
-[4.2031] 114.45459460912
-[4.2045] 140  230
-[4.2055] 63.532573699951  286.48965454102
-[4.2066] 95.070228542466
-[4.2079] 140  230
-[4.2091] 70.244125366211  270.83215332031
-[4.2103] 80.82788374502
-[4.2119] 140  230
-[4.2132] 116.65935516357  233.48059082031
-[4.2145] 23.598733310045
+dragonBones::CCDBManager::printTickCount tickcount:1 thisptr:108368208 msCCDBManager:0, sizeof(128) 96, 20
+[0.4954] [DEPRECATED] module api.GameState is deprecated, please use cc.utils.State
+[0.4972] [INFO] GameState.load() - get values from "E:\GitHub\quick-cocos2d-x-master\samples\aa\proj.win32\Debug\data.txt"
+[2.2959] layer began
+[2.3995] havetable len:3
