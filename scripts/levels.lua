@@ -2,10 +2,10 @@ local levels = {
 	{
 		id = 1,
 		speed1 = 36,
-		speed2 = 36,
+		speed2 = -36,
 		time = 0,
 		startNumber = 3,
-		myNumber = 1
+		myNumber = 3
 	},
 	{
 		id = 2,

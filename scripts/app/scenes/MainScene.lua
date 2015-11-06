@@ -3,8 +3,25 @@ local MainScene = class("MainScene", function()
     return display.newScene("MainScene")
 end)
 
+
+local nowscene = nil;
+
+function onButtonClicked(event)
+    if event.buttonIndex == 1 then
+        --.... 玩家选择了 YES 按钮
+        app.exit();
+    else
+        --.... 玩家选择了 NO 按钮
+        if nowscene then
+            --todo
+            nowscene.gameOver = false;
+        end
+    end
+end
+
 function MainScene:ctor()
     --初始化
+    nowscene = self;
     self:initLevelIndex(GameData.lv);
 
     -- 注册帧事件  注册之后一定要 启用 才生效
@@ -16,7 +33,7 @@ end
 
 function MainScene:initLevelIndex(level)
 
-    if self.faileLabel == nil then
+    if self.failLabel == nil then
         --todo
         self.failLabel = ui.newTTFLabel({text = "Failed!", size = 30, align = ui.TEXT_ALIGN_CENTER,x = display.cx,y = display.cy});
         self:addChild(self.failLabel, 6)
@@ -40,7 +57,6 @@ function MainScene:initLevelIndex(level)
         self.allpass = ui.newTTFLabel({text = "All Pass!", size = 30, align = ui.TEXT_ALIGN_CENTER,x = display.cx,y = display.cy});
         self:addChild(self.allpass, 6); 
     end
-
     self.allpass:setColor(ccc3(0,255, 0));
     self.allpass:setScale(0.7);
     self.allpass:setVisible(false);
@@ -114,10 +130,17 @@ function MainScene:initLevelIndex(level)
 
     --添加触摸事件--
     self.contentLayer:setTouchMode(cc.TOUCH_MODE_ONE_BY_ONE)  --单点触摸
+    self.contentLayer:setTouchEnabled(true)
     self.contentLayer:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)
         return self:onTouch(event.name, event.x,event.y)
     end)
-    self.contentLayer:setTouchEnabled(true)
+    
+
+    self.contentLayer:setKeypadEnabled(true)
+    self.contentLayer:addNodeEventListener(cc.KEYPAD_EVENT,function(event)
+            return self:ExitGame(event)
+            end)
+    
 end
 
 function MainScene:onEnter()
@@ -184,8 +207,6 @@ function MainScene:addResources(levelindex)
         --保存所有未插入的小球
         self.ballDown[#self.ballDown + 1] = balldd;
     end
-
-
 end
 
 --1/60
@@ -222,15 +243,11 @@ end
 function MainScene:onTouch(name,x,y)
     -- body
     if name == "began" then  
-        print("layer began") 
         self:BallUp();
     elseif name == "moved" then  
-        print("layer moved")  
     elseif name == "ended" then  
-        print("layer ended")
     elseif name == "cancelled" then
           --todo 
-        print("layer cancelled") 
     end  
 end
 
@@ -245,8 +262,6 @@ function MainScene:BallUp()
         if ball ~= nil then
             --发射-
             self.running = true;
-
-            --ball:setParent(nil);
             --执行动作
             local  rLittleBall = 7;
             local len = rLittleBall * 3.0;
@@ -265,6 +280,13 @@ function MainScene:BallUp()
                 end
             end
         end
+    else
+        if  self.gameOver == true and (self.sucessLabel:isVisible() or self.allpass:isVisible() or self.failLabel:isVisible()) then
+            --todo
+            --重试--
+            self.gameOver = false;
+            self:initLevelIndex(GameData.lv);
+        end
     end
 end
 
@@ -277,7 +299,6 @@ function MainScene:callback(ball)
     if ball ~= nil then
         --进行区域判断--
         self.running = false;
-        print("havetable len:"..#self.tableArray);
         for i=1,#self.tableArray do
             local tmpball = self.tableArray[i];
             if tmpball ~= nil then
@@ -350,4 +371,16 @@ function MainScene:callback(ball)
     end
 end
 
+
+function MainScene:ExitGame(event)
+    -- body
+    if device.platform == "windows" then
+        if event.key == "back" then 
+            self.gameOver = true;
+            device.showAlert("Confirm Exit", "Are you sure exit game ?", {"YES", "NO"}, onButtonClicked);
+        end
+    else
+        app.exit();
+    end
+end
 return MainScene
